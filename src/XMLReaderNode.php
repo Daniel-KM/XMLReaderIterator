@@ -212,7 +212,7 @@ class XMLReaderNode implements XMLReaderAggregate
      * @throws BadMethodCallException
      * @return DOMNode
      */
-    public function expand(DOMNode $baseNode = null)
+    public function expand(?DOMNode $baseNode = null)
     {
         if (null === $baseNode) {
             $baseNode = new DomDocument();
