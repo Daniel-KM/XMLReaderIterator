@@ -4,12 +4,13 @@
  * This file is part of the XMLReaderIterator package.
  *
  * Copyright (C) 2012, 2013, 2014, 2015 hakre <http://hakre.wordpress.com>
+ * Copyright (C) 2025 Daniel Berthereau
  *
  * build script
  */
 
 $errors = 0;
-$warnings = 0;
+// $warnings = 0;
 
 $projectDir = __DIR__;
 $buildDir = $projectDir . '/build';
@@ -35,6 +36,8 @@ function built_test_git_tag($version, &$errors)
     echo "INFO: Validating git tag version:";
 
     $command = "git tag --contains HEAD";
+    $output = array();
+    $exitCode = null;
 
     $target = 'v' . $version;
     $tagName = exec($command, $output, $exitCode);
@@ -92,10 +95,11 @@ function built_test_readme_get_version(&$errors)
     $file = 'README.md';
     $data = file($file);
     $version = null;
+    $matches = array();
 
     foreach ($data as $index => $line) {
         if ($line === "### Change Log:\n") {
-            $version = preg_match('~`(\d\.\d+\.\d+)`~', $data[$index + 2], $m) ? $m[1] : null;
+            $version = preg_match('~`(\d\.\d+\.\d+)`~', $data[$index + 2], $matches) ? $matches[1] : null;
         }
         if ($index > 10) {
             break;
@@ -155,9 +159,11 @@ function built_test_composer_validate_json(&$errors)
     $composer = 'composer';
 
     $command = "$composer --no-ansi --version";
+    $output = array();
+    $exitCode = null;
 
     exec($command, $output, $exitCode);
-    list($versionLine) = $output;
+    $versionLine = !$exitCode && $output ? reset($output) : '';
     if (!preg_match('~^Composer version (?:[12]\.\d+\.\d+|1\.0-dev \([0-9a-f]{40}\)|[0-9a-f]{40}) 2\d{3}-(?:0\d|1[0-2])-(?:[0-2]\d|3[0-1]) (?:[0-1]\d|2[0-3]):[0-5]\d:(?:[0-5]\d|60)$~', $versionLine)) {
         echo "ERROR: Unable to invoke Composer.\n";
         $errors++;
@@ -189,9 +195,11 @@ function build_test_tests(&$errors)
     }
 
     $command = "$phpunit --version";
+    $output = array();
+    $exitCode = null;
 
     exec($command, $output, $exitCode);
-    list($versionLine) = $output + array(null);
+    $versionLine = !$exitCode && $output ? reset($output) : '';
     if (!preg_match('~^PHPUnit \d\.\d\.\d+ by Sebastian Bergmann\.$~', $versionLine)) {
         echo "ERROR: Unable to invoke PHPUnit.\n";
         $errors++;
@@ -224,6 +232,7 @@ function build_test_tests(&$errors)
 function build_test_autoload_file(&$errors, $autoLoadFile)
 {
     $command = sprintf('php -f %s -- --verbose --require %s', escapeshellarg(__DIR__ . '/tests/autoload/test.php'), escapeshellarg($autoLoadFile));
+    $exitCode = null;
     passthru($command, $exitCode);
 
     if (0 !== $exitCode) {
@@ -264,6 +273,7 @@ function build_create_concatenate_file(&$errors, $concatenateFile, $autoLoadFile
         echo "ERROR: Problem parsing file.\n";
     }
     $count = 0;
+    $matches = array();
     foreach ($lines as $line) {
         $result = preg_match($pattern, $line, $matches);
         if (!$result) {
@@ -378,6 +388,8 @@ function build_make_clean(&$errors, $buildDir, $concatenateDir)
 function build_tree_uncommitted_changes(&$errors, $workDir, $pathSpec = '.')
 {
     $command = sprintf('git -C %s status --porcelain -- %s', escapeshellarg($workDir), escapeshellarg($pathSpec));
+    $output = array();
+    $exitCode = null;
     exec($command, $output, $exitCode);
 
     if (0 !== $exitCode) {
@@ -404,6 +416,8 @@ function build_tree_uncommitted_changes(&$errors, $workDir, $pathSpec = '.')
 function build_gist_commit(&$errors, $gistDir, $readmeVersion)
 {
     $command = sprintf('git -C %s log --format="%%B" -n 1 HEAD', escapeshellarg($gistDir));
+    $output = array();
+    $exitCode = null;
     exec($command, $output, $exitCode);
 
     if (0 !== $exitCode) {
@@ -420,7 +434,7 @@ function build_gist_commit(&$errors, $gistDir, $readmeVersion)
     $target = "Version $readmeVersion\n\n";
     $needsAmending = $gistCurrentMessage === $target;
 
-    if (true === $unchanged = !rtrim(`git diff --quiet; echo $?`)) {
+    if (true === !rtrim(`git diff --quiet; echo $?`)) {
         if (false === $needsAmending) {
             echo "ERROR: gist has no changes but $readmeVersion not current.\n";
             $errors++;
@@ -449,7 +463,7 @@ function build_gist_commit(&$errors, $gistDir, $readmeVersion)
         return;
     }
 
-    if (false === $unchanged = !rtrim(`git diff --quiet; echo $?`)) {
+    if (false === !rtrim(`git diff --quiet; echo $?`)) {
         echo "ERROR: gist still has changes after commit.\n";
         $errors++;
     }

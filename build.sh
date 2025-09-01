@@ -21,9 +21,9 @@ if [ ! -d vendor ]; then
     exit 1
 fi
 
-if [ -f vendor/vendor-dev.patch ] && command -v git &> /dev/null; then
+if [ -f scripts/vendor-dev.patch ] && command -v git &> /dev/null; then
   git --version
-  git apply --unsafe-paths --directory=vendor -- vendor/vendor-dev.patch
+  git apply --unsafe-paths --directory=vendor -- scripts/vendor-dev.patch
 fi
 
 php -f build.php
