@@ -1,6 +1,6 @@
 <?php
 
-require('xmlreader-iterators.php'); // require XMLReaderIterator library
+require 'xmlreader-iterators.php'; // require XMLReaderIterator library
 
 $xmlFile = 'data/products.xml';
 
@@ -13,7 +13,7 @@ foreach ($list as $item) {
 
     foreach ($item->getChildElements('attributes') as $attributeList) {
         foreach ($attributeList->getChildElements() as $attribute) {
-            printf('  - %s: %s' . \PHP_EOL, $attribute->name, (string)$attribute);
+            printf('  - %s: %s' . \PHP_EOL, $attribute->name, (string) $attribute);
         }
     }
 }

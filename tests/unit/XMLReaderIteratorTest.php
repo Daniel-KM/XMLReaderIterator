@@ -24,9 +24,10 @@
 /**
  * Class XMLReaderIteratorTest
  */
-class XMLReaderIteratorTest extends PHPUnit_Framework_TestCase {
-
-    public function testIteration() {
+class XMLReaderIteratorTest extends PHPUnit_Framework_TestCase
+{
+    public function testIteration()
+    {
         $reader = new XMLReaderStub('<r><a>1</a><a>2</a></r>');
 
         $it = new XMLReaderIterator($reader);

@@ -476,7 +476,6 @@ function fseek_first_empty_line($handle)
     return !fseek($handle, $lastLine);
 }
 
-
 /**
  * shorten pathname realtive to cwd
  *
@@ -619,10 +618,9 @@ function stream_put_contents($handle, $data, $offset = null, $maxlength = null)
         return false;
     }
 
-
     $length = strlen($data);
     if (null !== $maxlength) {
-        $length = max(0, (int)$maxlength);
+        $length = max(0, (int) $maxlength);
     }
 
     if (null !== $offset) {

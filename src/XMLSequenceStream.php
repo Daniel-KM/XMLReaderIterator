@@ -203,7 +203,7 @@ class XMLSequenceStream
     private function declPos($offset = 0)
     {
         $result      = preg_match(self::DECL_POS_PATTERN, $this->reader->buffer, $matches, PREG_OFFSET_CAPTURE, $offset);
-        if ($result === FALSE) {
+        if ($result === false) {
             throw new UnexpectedValueException('Regex failed.');
         }
 

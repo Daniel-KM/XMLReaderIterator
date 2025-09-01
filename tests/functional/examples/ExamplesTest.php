@@ -37,7 +37,6 @@ class ExamplesTest extends XMLReaderTestCase
         parent::tearDown();
     }
 
-
     /**
      * @param string $file
      *
@@ -46,7 +45,8 @@ class ExamplesTest extends XMLReaderTestCase
      *
      * @dataProvider provideExampleFiles
      */
-    public function testRunPhpFile($file) {
+    public function testRunPhpFile($file)
+    {
         $name = basename($file, '.php');
 
         $buffer = null;
@@ -86,11 +86,13 @@ class ExamplesTest extends XMLReaderTestCase
         }
     }
 
-    private function saveInclude() {
+    private function saveInclude()
+    {
         include func_get_arg(0);
     }
 
-    private function getExpectedFile($forFile) {
+    private function getExpectedFile($forFile)
+    {
         $name = basename($forFile);
         $name = strtr($name, '.', '_');
         $file = __DIR__ . '/Expectations/' . $name . '.out';

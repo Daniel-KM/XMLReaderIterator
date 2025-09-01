@@ -25,7 +25,6 @@
  * Class XMLTypeFilter
  *
  * FilterIterator to only accept one or more specific XMLReader nodeTypes
- *
  */
 class XMLNodeTypeFilter extends XMLReaderFilterBase
 {

@@ -36,7 +36,8 @@ class XMLReaderElementTest extends PHPUnit_Framework_TestCase
         $this->reader  = new XMLReaderStub('<root><child pos="first">node value</child><child pos="first"/></root>');
     }
 
-    public function testElementCreation() {
+    public function testElementCreation()
+    {
         $reader = $this->reader;
         $reader->next();
         $element = new XMLReaderElement($reader);
@@ -44,7 +45,8 @@ class XMLReaderElementTest extends PHPUnit_Framework_TestCase
         $this->assertSame($element->name, 'root');
     }
 
-    public function testReaderAttributeHandling() {
+    public function testReaderAttributeHandling()
+    {
         $reader = new XMLReaderStub("<root pos=\"first\" plue=\"a&#13;&#10;b&#32;  c\t&#9;d\">node value</root>");
         $reader->next();
         $this->assertSame("first", $reader->getAttribute('pos'));
@@ -54,7 +56,8 @@ class XMLReaderElementTest extends PHPUnit_Framework_TestCase
         $this->assertSame("<root pos=\"first\" plue=\"a&#13;&#10;b   c &#9;d\"/>", $xml, 'XML generation');
     }
 
-    public function testCheckNodeValue() {
+    public function testCheckNodeValue()
+    {
         $reader = new XMLReaderStub('<root><b>has</b></root>');
 
         /** @var XMLElementIterator|XMLReaderNode[] $it */

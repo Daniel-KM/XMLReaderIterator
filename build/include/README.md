@@ -38,7 +38,7 @@
  - `0.0.23` first try of a compatibility layer for PHP installs with a libxml
     version below version 2.6.20.
     functions with compatibility checks are `XMLReaderNode::readOuterXml()`
-   and `XMLReaderNode::readString()`.
+    and `XMLReaderNode::readString()`.
 
  - `0.0.21` moved library into new repository and added
    `XMLReaderAggregate`.
@@ -46,7 +46,7 @@
  - `0.0.19` added `XMLElementXpathFilter`, a `FilterIterator` for
    `XMLReaderIterator` by an xpath expression.
 
-   ~~~php
+   ```php
    $reader = new XMLReader();
    $reader->open($xmlFile);
    $it = new XMLElementIterator($reader);
@@ -56,15 +56,14 @@
        '//user[@id = "1" or @id = "6"]//message'
    );
 
-   foreach($list as $message) {
+   foreach ($list as $message) {
        echo " * ",  $message->readString(), "\n";
    }
-   ~~~
+   ```
 
 ### Stackoverflow Q&A for the XMLReader Iterators
 
-the latest on top (for more examples, checkout the
-[`examples`] folder):
+the latest on top (for more examples, checkout the [`examples`] folder):
 
 - [Add Tag Element using XMLReader and SimpleXML or XMLWriter](https://stackoverflow.com/q/69455574/367456)
 - [How to distinguish between empty element and null-size string in DOMDocument?](http://stackoverflow.com/a/24109776/367456)

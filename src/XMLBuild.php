@@ -30,7 +30,6 @@
  */
 abstract class XMLBuild
 {
-
     /**
      * indentLines()
      *
@@ -152,6 +151,7 @@ abstract class XMLBuild
      *
      * @param string $str
      * @param int|null $maxLen optional, defaults to 20 (null), 0 (or below) for 512 block size
+     *
      * @return string
      */
     public static function displayString($str, $maxLen = null)
@@ -174,6 +174,7 @@ abstract class XMLBuild
      *
      * @param string $str
      * @param int|null $maxLen {@see XMLBuild::displayString()}
+     *
      * @return string
      */
     public static function dumpString($str, $maxLen = null)

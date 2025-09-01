@@ -7,7 +7,7 @@
  * Example: Read XML from a file that contains a sequence of XML documents
  */
 
-require('xmlreader-iterators.php'); // require XMLReaderIterator library
+require 'xmlreader-iterators.php'; // require XMLReaderIterator library
 
 stream_wrapper_register('xmlseq', 'XMLSequenceStream');
 

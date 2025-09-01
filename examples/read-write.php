@@ -8,7 +8,7 @@
  * XMLWriterIteration; insert new attributes.
  */
 
-require('xmlreader-iterators.php'); // require XMLReaderIterator library
+require 'xmlreader-iterators.php'; // require XMLReaderIterator library
 
 $xmlInputFile  = 'data/dobs-items.xml';
 $xmlOutputFile = 'php://output';
@@ -27,7 +27,6 @@ $itemsCount = 0;
 $itemCount  = 0;
 foreach ($iterator as $node) {
     $isElement = $node->nodeType === XMLReader::ELEMENT;
-
 
     if ($isElement && $node->name === 'ITEMS') {
         // increase counter for <ITEMS> elements and reset <ITEM> counter

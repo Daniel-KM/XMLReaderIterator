@@ -21,7 +21,6 @@
  * @license AGPL-3.0-or-later <https://spdx.org/licenses/AGPL-3.0-or-later>
  */
 
-
 /**
  * Class DOMReadingIteration
  *
@@ -92,11 +91,11 @@ class DOMReadingIteration extends IteratorIterator
     private function build()
     {
         if (!$this->valid()) {
-            $this->depth     = NULL;
-            $this->lastDepth = NULL;
-            $this->node      = NULL;
-            $this->lastNode  = NULL;
-            $this->stack     = NULL;
+            $this->depth     = null;
+            $this->lastDepth = null;
+            $this->node      = null;
+            $this->lastNode  = null;
+            $this->stack     = null;
             return;
         }
 
@@ -109,11 +108,11 @@ class DOMReadingIteration extends IteratorIterator
                 /** @var \DOMElement $node */
                 if ($prefix) {
                     $uri = $parent->lookupNamespaceURI($prefix) ?: $this->nsUriSelfLookup($prefix);
-                    if ($uri === NULL) {
+                    if ($uri === null) {
                         trigger_error(sprintf('Unable to lookup NS URI for element prefix "%s"', $prefix));
                     }
                     /** @var \DOMDocument $doc */
-                    $doc  = ($parent->ownerDocument?:$parent);
+                    $doc  = ($parent->ownerDocument ?: $parent);
                     $node = $doc->createElementNS($uri, $this->reader->name);
                     $node = $parent->appendChild($node);
                 } else {
@@ -135,7 +134,7 @@ class DOMReadingIteration extends IteratorIterator
                             $node->setAttributeNS('http://www.w3.org/2000/xmlns/', $this->reader->name, $this->reader->value);
                         } elseif ($prefix) {
                             $uri = $parent->lookupNamespaceUri($prefix) ?: @$nsUris[$prefix];
-                            if ($uri === NULL) {
+                            if ($uri === null) {
                                 trigger_error(sprintf('Unable to lookup NS URI for attribute prefix "%s"', $prefix));
                             }
                             $node->setAttributeNS($uri, $this->reader->name, $this->reader->value);
@@ -147,7 +146,7 @@ class DOMReadingIteration extends IteratorIterator
                 break;
 
             case XMLReader::END_ELEMENT:
-                $node = NULL;
+                $node = null;
                 break;
 
             case XMLReader::COMMENT:
@@ -165,8 +164,8 @@ class DOMReadingIteration extends IteratorIterator
                 break;
 
             default:
-                $node    = NULL;
-                $message = sprintf('Unhandled XMLReader node type %s', XMLReaderNode::dump($this->reader, TRUE));
+                $node    = null;
+                $message = sprintf('Unhandled XMLReader node type %s', XMLReaderNode::dump($this->reader, true));
                 trigger_error($message);
         }
 
@@ -174,8 +173,9 @@ class DOMReadingIteration extends IteratorIterator
         $this->node  = $node;
     }
 
-    private function nsUriSelfLookup($prefix) {
-        $uri = NULL;
+    private function nsUriSelfLookup($prefix)
+    {
+        $uri = null;
 
         if ($this->reader->moveToFirstAttribute()) {
             do {

@@ -42,7 +42,7 @@ class XMLAttributePreg extends XMLAttributeFilterBase
     {
         parent::__construct($elements, $attr);
 
-        if (false === preg_match((string)$pattern, '')) {
+        if (false === preg_match((string) $pattern, '')) {
             throw new InvalidArgumentException("Invalid pcre pattern '$pattern'.");
         }
         $this->pattern = $pattern;

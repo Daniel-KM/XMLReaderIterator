@@ -7,7 +7,7 @@
  * Example: Iterate over all elements
  */
 
-require('xmlreader-iterators.php'); // require XMLReaderIterator library
+require 'xmlreader-iterators.php'; // require XMLReaderIterator library
 
 $xmlFile = 'data/movies.xml';
 
@@ -17,6 +17,6 @@ $reader->open($xmlFile);
 /** @var XMLElementIterator|XMLReaderNode[] $it */
 $it = new XMLElementIterator($reader);
 
-foreach($it as $index => $element) {
+foreach ($it as $index => $element) {
     printf("#%02d: %s\n", $index, XMLBuild::readerNode($reader));
 }

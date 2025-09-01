@@ -7,7 +7,7 @@
  * Example: Build a DOMDocument with DOMReadingIteration
  */
 
-require('xmlreader-iterators.php'); // require XMLReaderIterator library
+require 'xmlreader-iterators.php'; // require XMLReaderIterator library
 
 $xmlFile = 'data/features-basic.xml';
 

@@ -41,14 +41,16 @@ class XMLWritingIteration extends IteratorIterator
      */
     private $reader;
 
-    public function __construct(XMLWriter $writer, XMLReader $reader) {
+    public function __construct(XMLWriter $writer, XMLReader $reader)
+    {
         $this->writer = $writer;
         $this->reader = $reader;
 
         parent::__construct(new XMLReaderIteration($reader));
     }
 
-    public function write() {
+    public function write()
+    {
         $reader = $this->reader;
         $writer = $this->writer;
 

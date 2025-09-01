@@ -350,7 +350,7 @@ class XMLReaderNode implements XMLReaderAggregate
      * @param bool $return (optional) prints by default but can return string
      * @return string|void
      */
-    public static function dump(XMLReader $reader, $return = FALSE)
+    public static function dump(XMLReader $reader, $return = false)
     {
         $node = new self($reader);
 
@@ -372,13 +372,12 @@ class XMLReaderNode implements XMLReaderAggregate
             $extra = sprintf(' %s = %s', $reader->name, XMLBuild::dumpString($reader->value));
         }
 
-
         if ($reader->nodeType === XMLReader::CDATA
             || $reader->nodeType === XMLReader::TEXT
             || $reader->nodeType === XMLReader::WHITESPACE
             || $reader->nodeType === XMLReader::SIGNIFICANT_WHITESPACE
         ) {
-            $extra = sprintf( ' %s', XMLBuild::dumpString($reader->value));
+            $extra = sprintf(' %s', XMLBuild::dumpString($reader->value));
         }
 
         $label = sprintf("(#%d) %s%s", $nodeType, $nodeName, $extra);

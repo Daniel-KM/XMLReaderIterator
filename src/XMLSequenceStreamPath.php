@@ -33,28 +33,32 @@ class XMLSequenceStreamPath
      */
     private $path;
 
-    public function __construct($path) {
+    public function __construct($path)
+    {
         $this->path = $path;
     }
 
-    public function getProtocol() {
+    public function getProtocol()
+    {
         $parts = $this->parsePath($this->path);
         return $parts['scheme'];
     }
 
-    public function getSpecific() {
+    public function getSpecific()
+    {
         $parts = $this->parsePath($this->path);
         return $parts['specific'];
     }
 
-    public function getFile() {
+    public function getFile()
+    {
         $specific = $this->getSpecific();
         $specific = str_replace(array('\\', '/./'), '/', $specific);
         return $specific;
     }
 
-    private function parsePath($path) {
-
+    private function parsePath($path)
+    {
         $parts = array_combine(array('scheme', 'specific'), explode('://', $path, 2) + array(null, null));
 
         if (null === $parts['specific']) {
@@ -64,7 +68,8 @@ class XMLSequenceStreamPath
         return $parts;
     }
 
-    public function __toString() {
+    public function __toString()
+    {
         return $this->path;
     }
 }

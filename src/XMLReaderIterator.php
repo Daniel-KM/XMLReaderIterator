@@ -73,7 +73,6 @@ class XMLReaderIterator implements Iterator, XMLReaderAggregate
      * compare {@see XMLReaderIteration::skipNextRead()}
      *
      * @see XMLReaderIterator::next()
-     *
      */
     public function skipNextRead()
     {
@@ -88,7 +87,6 @@ class XMLReaderIterator implements Iterator, XMLReaderAggregate
             }
             self::next();
         }
-        ;
 
         return self::valid() ? self::current() : false;
     }

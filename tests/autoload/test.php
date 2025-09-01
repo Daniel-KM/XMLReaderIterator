@@ -21,7 +21,7 @@ if (function_exists('ini_set')) {
     ini_set('log_errors', '1');
     ini_set('error_log', '');
     ini_set('display_errors', '0');
-    ini_set('error_reporting', (string)~0);
+    ini_set('error_reporting', (string) ~0);
 }
 
 $help = false;
@@ -55,7 +55,8 @@ unset($cwd, $base);
 
 // acquire project class-names by glob pattern
 $requiredClassNames = array_reduce(glob('src/*.php'), function (array $c, $p) {
-    $c[] = basename($p, '.php'); return $c;
+    $c[] = basename($p, '.php');
+    return $c;
 }, array());
 if (empty($requiredClassNames)) {
     fprintf(STDERR, "fatal: no classes to check.\n");
@@ -63,7 +64,7 @@ if (empty($requiredClassNames)) {
 }
 
 // error handling incl. on shutdown to highlight last error if not yet reported
-$phpErrors = (object)array('total' => 0, 'by_number' => array(), 'errors' => array(), 'report_on_shutdown' => true);
+$phpErrors = (object) array('total' => 0, 'by_number' => array(), 'errors' => array(), 'report_on_shutdown' => true);
 function error_handler($no, $str, $file, $line)
 {
     global $phpErrors;
@@ -73,6 +74,7 @@ function error_handler($no, $str, $file, $line)
     $phpErrors->errors[] = $error;
     return false;
 }
+
 function shutdown_function()
 {
     global $phpErrors, $label;
@@ -96,7 +98,7 @@ register_shutdown_function('shutdown_function');
  * test: 1. the require-file can be required
  */
 
-$requireResult = require_once($require);
+$requireResult = require_once $require;
 $phpErrors->report_on_shutdown = false;
 if ($phpErrors->total) {
     fprintf(STDERR, "fatal: php %s with \"%s\" %d type(s) of error(s) ([%s]), %d total error(s) for require of file: \"%s\".\n", PHP_VERSION, $label, count($phpErrors->by_number), implode('], [', array_keys($phpErrors->by_number)), $phpErrors->total, $require);

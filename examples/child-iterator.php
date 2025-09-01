@@ -7,7 +7,7 @@
  * Example: Iterate over all elements
  */
 
-require('xmlreader-iterators.php'); // require XMLReaderIterator library
+require 'xmlreader-iterators.php'; // require XMLReaderIterator library
 
 $xmlFile = 'data/sample-rss-091.xml';
 

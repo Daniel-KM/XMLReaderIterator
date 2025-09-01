@@ -27,7 +27,7 @@
  * Note: use as PHP CLI command
  */
 
-require('xmlreader-iterators.php'); // require XMLReaderIterator library
+require 'xmlreader-iterators.php'; // require XMLReaderIterator library
 
 stream_wrapper_register('xmlseq', 'XMLSequenceStream');
 
@@ -69,21 +69,21 @@ while ($process) {
         exit(0);
     } elseif ($cmd === '-t') {
         $in = array_shift($process);
-        if ($in !== trim((int)$in) || $in < 0) {
+        if ($in !== trim((int) $in) || $in < 0) {
             echo "invalid -t time limit in seconds: $in\n";
             print_usage();
             exit(1);
         }
-        $timeLimit = (int)$in;
+        $timeLimit = (int) $in;
         continue;
     } elseif ($cmd === '-l') {
         $in = array_shift($process);
-        if ($in !== trim((int)$in) || $in < 0) {
+        if ($in !== trim((int) $in) || $in < 0) {
             echo "invalid -l elements to scan limit: $in\n";
             print_usage();
             exit(1);
         }
-        $elementsToScan = (int)$in;
+        $elementsToScan = (int) $in;
         continue;
     } elseif ($cmd === '-o') {
         $in = array_shift($process);
@@ -97,19 +97,18 @@ while ($process) {
     }
     $file = $cmd;
     break;
-};
+}
 
 
-$timeLimit = (int)max(0, $timeLimit);
-
+$timeLimit = (int) max(0, $timeLimit);
 
 printf("input.: %s\n", $file);
 printf("output: %s\n", $outfile);
 printf(
-    "limits: %s elements with %s time-limit\n", $elementsToScan ? : 'all', $timeLimit ? "$timeLimit seconds" : 'no'
+    "limits: %s elements with %s time-limit\n", $elementsToScan ?: 'all', $timeLimit ? "$timeLimit seconds" : 'no'
 );
 
-$indexLimit = (int)max(0, $elementsToScan - 2);
+$indexLimit = (int) max(0, $elementsToScan - 2);
 
 $levels = array();
 
@@ -270,7 +269,7 @@ class LevelsTree implements RecursiveIterator
     #[\ReturnTypeWillChange]
     public function valid()
     {
-        return (bool)$this->toConsume;
+        return (bool) $this->toConsume;
     }
 
     #[\ReturnTypeWillChange]
@@ -305,7 +304,7 @@ class LevelsTree implements RecursiveIterator
         $this->childCachePrefix = $key;
         $this->childCache       = $this->levels->getChildrenOfAtLevel($key, $this->level + 1);
 
-        return (bool)$this->childCache;
+        return (bool) $this->childCache;
     }
 
     #[\ReturnTypeWillChange]

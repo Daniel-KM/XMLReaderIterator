@@ -7,7 +7,7 @@
  * Example: XML Reader standard iteration
  */
 
-require('xmlreader-iterators.php'); // require XMLReaderIterator library
+require 'xmlreader-iterators.php'; // require XMLReaderIterator library
 
 $xml = <<<XML
 <movies>

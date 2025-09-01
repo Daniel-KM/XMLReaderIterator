@@ -39,7 +39,6 @@ class XMLAttributeFilter extends XMLAttributeFilterBase
      */
     public function __construct(XMLElementIterator $elements, $attr, $compare, $invert = false)
     {
-
         parent::__construct($elements, $attr);
 
         $this->compare = (array) $compare;

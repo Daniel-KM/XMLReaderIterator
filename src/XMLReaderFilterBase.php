@@ -30,8 +30,8 @@
  */
 abstract class XMLReaderFilterBase extends FilterIterator implements XMLReaderAggregate
 {
-
-    public function __construct(XMLReaderIterator $elements) {
+    public function __construct(XMLReaderIterator $elements)
+    {
         parent::__construct($elements);
     }
 

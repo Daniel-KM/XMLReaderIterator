@@ -9,7 +9,7 @@
  * DOMDocument.
  */
 
-require('xmlreader-iterators.php'); // require XMLReaderIterator library
+require 'xmlreader-iterators.php'; // require XMLReaderIterator library
 
 $xmlInputFile  = 'data/offers.xml';
 $xmlOutputFile = 'php://output';
@@ -42,4 +42,3 @@ foreach ($iterator as $node) {
 }
 
 $writer->endDocument();
-

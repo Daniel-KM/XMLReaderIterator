@@ -69,8 +69,8 @@ final class BufferedFileRead
      *
      * @return bool
      */
-    public function fopen($filename, $mode, $use_include_path = null, $context = null) {
-
+    public function fopen($filename, $mode, $use_include_path = null, $context = null)
+    {
         if ($mode !== self::MODE_READ_BINARY) {
             $message = sprintf(
                 "unsupported mode '%s', only '%s' is supported for buffered file read", $mode, self::MODE_READ_BINARY
@@ -81,9 +81,9 @@ final class BufferedFileRead
         }
 
         if ($context === null) {
-            $handle = fopen($filename, self::MODE_READ_BINARY, (bool)$use_include_path);
+            $handle = fopen($filename, self::MODE_READ_BINARY, (bool) $use_include_path);
         } else {
-            $handle = fopen($filename, self::MODE_READ_BINARY, (bool)$use_include_path, $context);
+            $handle = fopen($filename, self::MODE_READ_BINARY, (bool) $use_include_path, $context);
         }
 
         if (!$handle) {
@@ -102,7 +102,7 @@ final class BufferedFileRead
      *
      * @param int $count
      *
-     * @return int|bool length of buffer or FALSE on error
+     * @return int|bool length of buffer or false on error
      */
     public function append($count)
     {
@@ -151,40 +151,47 @@ final class BufferedFileRead
         return $return;
     }
 
-    public function fread($count) {
+    public function fread($count)
+    {
         return fread($this->handle, $count);
     }
 
-    public function feof() {
+    public function feof()
+    {
         return feof($this->handle);
     }
 
     /**
      * @return string
      */
-    public function getFile() {
+    public function getFile()
+    {
         return $this->file;
     }
 
-    public function __toString() {
+    public function __toString()
+    {
         return $this->file;
     }
 
     /**
      * @return int
      */
-    public function getReadAhead() {
+    public function getReadAhead()
+    {
         return $this->readAhead;
     }
 
     /**
      * @param int $readAhead
      */
-    public function setReadAhead($readAhead) {
-        $this->readAhead = max(0, (int)$readAhead);
+    public function setReadAhead($readAhead)
+    {
+        $this->readAhead = max(0, (int) $readAhead);
     }
 
-    public function close() {
+    public function close()
+    {
         if ($this->handle && fclose($this->handle)) {
             $this->handle = null;
         }
@@ -192,7 +199,8 @@ final class BufferedFileRead
         $this->buffer = '';
     }
 
-    public function __destruct() {
+    public function __destruct()
+    {
         $this->close();
     }
 }
