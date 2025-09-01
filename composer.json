@@ -1,7 +1,11 @@
 {
     "name": "hakre/xmlreaderiterator",
     "description": "Iterators for PHP XMLReader for ease of parsing",
-    "keywords": ["XML", "XMLReader", "Iterator"],
+    "keywords": [
+        "XML",
+        "XMLReader",
+        "Iterator"
+    ],
     "homepage": "https://github.com/hakre/XMLReaderIterator",
     "minimum-stability": "stable",
     "license": "AGPL-3.0-or-later",
@@ -24,5 +28,15 @@
         "ext-bz2": "*",
         "ext-libxml": "*",
         "phpunit/phpunit": "3.7.*"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "# For dev, patching phpunit for compatibility with all versions of php. Require php 5.3.3 to php 7.4.",
+            "[ $COMPOSER_DEV_MODE -eq 0 ] || patch -d vendor -p1 < vendor/vendor-dev.patch"
+        ],
+        "post-update-cmd": [
+            "# For dev, patching phpunit for compatibility with all versions of php. Require php 5.3.3 to php 7.4.",
+            "[ $COMPOSER_DEV_MODE -eq 0 ] || patch -d vendor -p1 < vendor/vendor-dev.patch"
+        ]
     }
 }
