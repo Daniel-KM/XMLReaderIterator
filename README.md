@@ -4,6 +4,10 @@
 
 ### Change Log:
 
+ - `0.1.13` fixed nested child element parsing (PR #21 on github); fixed
+   deprecation and notices for new php versions; normalized code and docblocks,
+   simplified install.
+
  - `0.1.12` maintenance release with fixes.
 
  - `0.1.11` maintenance release with fixes. added `XMLReader::CDATA` and
@@ -61,9 +65,18 @@
    }
    ```
 
+### Usage
+
+It is recommended to use the composer autoloading mechanism.
+
+To use without composer and for backwards compatibility, it is possible just to
+include the file `build/include/xmlreader-iterators.php` in any php project.
+
+Checkout the [`examples`] folder for more examples.
+
 ### Stackoverflow Q&A for the XMLReader Iterators
 
-the latest on top (for more examples, checkout the [`examples`] folder):
+The latest Q&A on top:
 
 - [Add Tag Element using XMLReader and SimpleXML or XMLWriter](https://stackoverflow.com/q/69455574/367456)
 - [How to distinguish between empty element and null-size string in DOMDocument?](http://stackoverflow.com/a/24109776/367456)
@@ -72,3 +85,14 @@ the latest on top (for more examples, checkout the [`examples`] folder):
 - [Getting XML Attribute with XMLReader and PHP](http://stackoverflow.com/a/15399491/367456)
 
 [`examples`]: https://github.com/hakre/XMLReaderIterator/tree/master/examples
+
+### Build
+
+To build the single file to use XMLReaderIterator without composer, run:
+
+```php
+composer install
+php -f build.php
+```
+
+The command `sh build.sh` can be used too.

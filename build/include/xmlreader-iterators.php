@@ -19,7 +19,7 @@
  *
  * @author hakre <http://hakre.wordpress.com>
  * @license AGPL-3.0-or-later <https://spdx.org/licenses/AGPL-3.0-or-later>
- * @version 0.1.12
+ * @version 0.1.13
  */
 
 /**
