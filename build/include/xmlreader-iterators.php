@@ -487,7 +487,7 @@ class XMLReaderIterator implements Iterator, XMLReaderAggregate
     {
         $stack  = $this->elementStack;
         $buffer = '';
-        /* @var $element XMLReaderElement */
+        /** @var \XMLReaderElement $element */
         while ($element = array_pop($stack)) {
             $buffer = $element->getXMLElementAround($buffer);
         }
@@ -770,13 +770,13 @@ class DOMReadingIteration extends IteratorIterator
             case XMLReader::ELEMENT:
                 $parent = $this->stack[$depth];
                 $prefix = $this->reader->prefix;
-                /* @var $node DOMElement */
+                /** @var \DOMElement $node */
                 if ($prefix) {
                     $uri = $parent->lookupNamespaceURI($prefix) ?: $this->nsUriSelfLookup($prefix);
                     if ($uri === NULL) {
                         trigger_error(sprintf('Unable to lookup NS URI for element prefix "%s"', $prefix));
                     }
-                    /* @var $doc DOMDocument */
+                    /** @var \DOMDocument $doc */
                     $doc  = ($parent->ownerDocument?:$parent);
                     $node = $doc->createElementNS($uri, $this->reader->name);
                     $node = $parent->appendChild($node);
@@ -1789,7 +1789,7 @@ abstract class XMLAttributeFilterBase extends XMLReaderFilterBase
 
     protected function getAttributeValues()
     {
-        /* @var $node XMLReaderNode */
+        /** @var \XMLReaderNode $node */
         $node = parent::current();
         if ('*' === $this->attr) {
             $attributes = $node->getAttributes()->getArrayCopy();

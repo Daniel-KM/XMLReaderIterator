@@ -195,7 +195,7 @@ class XMLReaderIterator implements Iterator, XMLReaderAggregate
     {
         $stack  = $this->elementStack;
         $buffer = '';
-        /* @var $element XMLReaderElement */
+        /** @var XMLReaderElement $element */
         while ($element = array_pop($stack)) {
             $buffer = $element->getXMLElementAround($buffer);
         }

@@ -40,7 +40,7 @@ abstract class XMLAttributeFilterBase extends XMLReaderFilterBase
 
     protected function getAttributeValues()
     {
-        /* @var $node XMLReaderNode */
+        /** @var \XMLReaderNode $node */
         $node = parent::current();
         if ('*' === $this->attr) {
             $attributes = $node->getAttributes()->getArrayCopy();

@@ -35,7 +35,7 @@ class DOMReadingIteration extends IteratorIterator
     const XMLNS = 'xmlns';
 
     /**
-     * @var array|DOMNode[]
+     * @var array|\DOMNode[]
      */
     private $stack;
 
@@ -50,12 +50,12 @@ class DOMReadingIteration extends IteratorIterator
     private $lastDepth;
 
     /**
-     * @var DOMNode
+     * @var \DOMNode
      */
     private $node;
 
     /**
-     * @var DOMNode
+     * @var \DOMNode
      */
     private $lastNode;
 
@@ -106,13 +106,13 @@ class DOMReadingIteration extends IteratorIterator
             case XMLReader::ELEMENT:
                 $parent = $this->stack[$depth];
                 $prefix = $this->reader->prefix;
-                /* @var $node DOMElement */
+                /** @var \DOMElement $node */
                 if ($prefix) {
                     $uri = $parent->lookupNamespaceURI($prefix) ?: $this->nsUriSelfLookup($prefix);
                     if ($uri === NULL) {
                         trigger_error(sprintf('Unable to lookup NS URI for element prefix "%s"', $prefix));
                     }
-                    /* @var $doc DOMDocument */
+                    /** @var \DOMDocument $doc */
                     $doc  = ($parent->ownerDocument?:$parent);
                     $node = $doc->createElementNS($uri, $this->reader->name);
                     $node = $parent->appendChild($node);

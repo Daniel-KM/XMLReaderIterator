@@ -48,7 +48,7 @@ class XMLReaderIterationTest extends PHPUnit_Framework_TestCase
 
         $count = 0;
 
-        /* @var $reader XMLReader */
+        /** @var \XMLReader $reader */
         foreach ($iterator as $index => $reader) {
             $this->assertSame($count, $index);
             list($nodeType, $depth) = $data[$index];

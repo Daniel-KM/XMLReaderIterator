@@ -561,7 +561,7 @@ function deltree($path)
         $path = array_pop($stack);
         $it = new DirectoryIterator($path);
         foreach ($it as $file) {
-            /* @var $file DirectoryIterator */
+            /** @var DirectoryIterator $file  */
             if ($file->isDot()) {
                 continue;
             }
