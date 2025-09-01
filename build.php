@@ -26,6 +26,10 @@ built_validate_version($readmeVersion, $errors);
 
 built_test_git_tag($readmeVersion, $errors);
 
+/**
+ * @param string $version
+ * @param int $errors
+ */
 function built_test_git_tag($version, &$errors)
 {
     echo "INFO: Validating git tag version:";
@@ -79,7 +83,7 @@ if ($errors) {
 }
 
 /**
- * @param $errors
+ * @param int $errors
  *
  * @return string|null
  */
@@ -109,6 +113,12 @@ function built_test_readme_get_version(&$errors)
     return $version;
 }
 
+/**
+ * @param string $version
+ * @param int $errors
+ *
+ * @return bool
+ */
 function built_validate_version($version, &$errors)
 {
     if (!preg_match('~^\d\.\d+\.\d+$~', $version)) {
@@ -120,11 +130,10 @@ function built_validate_version($version, &$errors)
     return true;
 }
 
-
 /**
  * @see http://php.net/json_decode
  *
- * @param      $path
+ * @param string $path
  * @param bool $assoc
  * @param int $depth
  * @param int $options
@@ -137,7 +146,7 @@ function json_decode_file($path, $assoc = false, $depth = 512, $options = 0)
 }
 
 /**
- * @param $errors
+ * @param int $errors
  */
 function built_test_composer_validate_json(&$errors)
 {
@@ -160,17 +169,14 @@ function built_test_composer_validate_json(&$errors)
     if ($exitCode !== 0) {
         echo "ERROR: Composer json validation did return exit code $exitCode which is not 0.\n";
         $errors++;
-
         return;
     }
 
     echo "INFO: composer.json validation did pass. You might need to review warnings your own.\n";
-
-    return;
 }
 
 /**
- * @param $errors
+ * @param int $errors
  */
 function build_test_tests(&$errors)
 {
@@ -189,7 +195,6 @@ function build_test_tests(&$errors)
     if (!preg_match('~^PHPUnit \d\.\d\.\d+ by Sebastian Bergmann\.$~', $versionLine)) {
         echo "ERROR: Unable to invoke PHPUnit.\n";
         $errors++;
-
         return;
     }
 
@@ -200,25 +205,21 @@ function build_test_tests(&$errors)
     if ($result === false) {
         echo "ERROR: Unable to invoke PHPUnit tests.\n";
         $errors++;
-
         return;
     }
 
     if ($exitCode !== 0) {
         echo "ERROR: PHPUnit did return exit code $exitCode which is not 0.\n";
         $errors++;
-
         return;
     }
 
     echo "INFO: phpunit testsuite did pass.\n";
-
-    return;
 }
 
 /**
- * @param $errors
- * @param $autoLoadFile
+ * @param int $errors
+ * @param string $autoLoadFile
  */
 function build_test_autoload_file(&$errors, $autoLoadFile)
 {
@@ -252,7 +253,6 @@ function build_create_concatenate_file(&$errors, $concatenateFile, $autoLoadFile
         if (!$concatenateFileHandle) {
             echo "ERROR: concatenateFile '$concatenateFile' can not be created.\n";
             $errors++;
-
             return;
         }
     }
@@ -292,6 +292,7 @@ function build_create_concatenate_file(&$errors, $concatenateFile, $autoLoadFile
         fclose($handle);
         $count++;
     }
+
     printf("INFO: concatenated %d files into %s.\n", $count, cwdname($concatenateFile));
 
     $buffer = file_get_contents($concatenateFile);
@@ -321,7 +322,6 @@ function build_create_concatenate_file(&$errors, $concatenateFile, $autoLoadFile
         return;
     }
 
-
     $search = " * @license AGPL-3.0-or-later <https://spdx.org/licenses/AGPL-3.0-or-later>\n */";
     $replace = " * @license AGPL-3.0-or-later <https://spdx.org/licenses/AGPL-3.0-or-later>\n * @version $version\n */";
 
@@ -350,9 +350,9 @@ function build_create_concatenate_file(&$errors, $concatenateFile, $autoLoadFile
 }
 
 /**
- * @param $errors
- * @param $buildDir
- * @param $concatenateDir
+ * @param int $errors
+ * @param string $buildDir
+ * @param string $concatenateDir
  */
 function build_make_clean(&$errors, $buildDir, $concatenateDir)
 {
@@ -369,8 +369,10 @@ function build_make_clean(&$errors, $buildDir, $concatenateDir)
 }
 
 /**
- * @param $errors
- * @param $pathSpec
+ * @param int $errors
+ * @param string $workdDir
+ * @param string $pathSpec
+ *
  * @return bool|null on error
  */
 function build_tree_uncommitted_changes(&$errors, $workDir, $pathSpec = '.')
@@ -395,9 +397,9 @@ function build_tree_uncommitted_changes(&$errors, $workDir, $pathSpec = '.')
 }
 
 /**
- * @param $errors
- * @param $gistDir
- * @param $readmeVersion
+ * @param int $errors
+ * @param string $gistDir
+ * @param string $readmeVersion
  */
 function build_gist_commit(&$errors, $gistDir, $readmeVersion)
 {
@@ -407,12 +409,13 @@ function build_gist_commit(&$errors, $gistDir, $readmeVersion)
     if (0 !== $exitCode) {
         echo "ERROR: git execution in ", __FUNCTION__, "() non-zero exit status.\n";
         $errors++;
-        return null;
+        return;
     }
 
     if ('' === $readmeVersion) {
         return;
     }
+
     $gistCurrentMessage = implode("\n", $output) . "\n";
     $target = "Version $readmeVersion\n\n";
     $needsAmending = $gistCurrentMessage === $target;
@@ -430,7 +433,7 @@ function build_gist_commit(&$errors, $gistDir, $readmeVersion)
     if (0 !== $exitCode) {
         echo "ERROR: gist command '$command' non-zero exit status.\n";
         $errors++;
-        return null;
+        return;
     }
 
     if ($needsAmending) {
@@ -453,7 +456,7 @@ function build_gist_commit(&$errors, $gistDir, $readmeVersion)
 }
 
 /**
- * @param $handle
+ * @param resource $handle
  *
  * @return bool
  */
@@ -477,7 +480,7 @@ function fseek_first_empty_line($handle)
 /**
  * shorten pathname realtive to cwd
  *
- * @param $path
+ * @param string $path
  *
  * @return string
  */
@@ -545,7 +548,7 @@ function copy_file_to_dir($file, $targetDir)
  * implemented as a stack so that no recursion is necessar and
  * traversal is fast.
  *
- * @param $path
+ * @param string $path
  */
 function deltree($path)
 {

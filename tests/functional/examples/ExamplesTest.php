@@ -39,7 +39,7 @@ class ExamplesTest extends XMLReaderTestCase
 
 
     /**
-     * @param $file
+     * @param string $file
      *
      * @throws Exception
      * @throws PHPUnit_Framework_SkippedTest

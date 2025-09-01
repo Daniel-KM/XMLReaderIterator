@@ -38,12 +38,11 @@ class XMLReaderTestCase extends PHPUnit_Framework_TestCase
         parent::setUp();
     }
 
-
     /**
      * helper method to create data-providers
      *
      * @param array $result
-     * @param       $path
+     * @param string $path
      *
      * @return array of arrays with one entry of each filename as string
      */

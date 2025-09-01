@@ -67,7 +67,7 @@ class XMLSequenceStreamTest extends XMLReaderTestCase
     /**
      * @dataProvider provideStreamFiles
      *
-     * @param $file
+     * @param string $file
      */
     public function testReadStream($file)
     {

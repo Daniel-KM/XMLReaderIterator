@@ -86,7 +86,7 @@ class XMLSequenceStream
     }
 
     /**
-     * @param $path
+     * @param string $path
      *
      * @return bool
      */

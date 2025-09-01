@@ -36,7 +36,7 @@ class XMLReaderIteration implements Iterator
     private $reader;
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $valid;
 

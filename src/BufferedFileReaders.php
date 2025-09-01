@@ -39,10 +39,10 @@ class BufferedFileReaders
     private $readers;
 
     /**
-     * @param $filename
-     * @param $mode
-     * @param $use_include_path
-     * @param $context
+     * @param string $filename
+     * @param string $mode
+     * @param bool $use_include_path
+     * @param resource|null $context
      *
      * @return BufferedFileRead or null on error
      */

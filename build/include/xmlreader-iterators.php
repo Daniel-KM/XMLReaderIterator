@@ -528,7 +528,7 @@ class XMLReaderIteration implements Iterator
     private $reader;
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $valid;
 
@@ -1956,8 +1956,8 @@ final class BufferedFileRead
     private $readAhead = 0;
 
     /**
-     * @param      $filename
-     * @param      $mode
+     * @param string $filename
+     * @param string $mode
      * @param null $use_include_path
      * @param null $context
      *
@@ -1994,7 +1994,7 @@ final class BufferedFileRead
      * appends up to $count bytes to the buffer up to
      * the read-ahead limit
      *
-     * @param $count
+     * @param int $count
      *
      * @return int|bool length of buffer or FALSE on error
      */
@@ -2026,7 +2026,7 @@ final class BufferedFileRead
     /**
      * shift bytes from buffer
      *
-     * @param $bytes - up to buffer-length bytes
+     * @param int $bytes - up to buffer-length bytes
      *
      * @return string
      */
@@ -2109,10 +2109,10 @@ class BufferedFileReaders
     private $readers;
 
     /**
-     * @param $filename
-     * @param $mode
-     * @param $use_include_path
-     * @param $context
+     * @param string $filename
+     * @param string $mode
+     * @param bool $use_include_path
+     * @param resource|null $context
      *
      * @return BufferedFileRead or null on error
      */
@@ -2286,7 +2286,7 @@ class XMLSequenceStream
     }
 
     /**
-     * @param $path
+     * @param string $path
      *
      * @return bool
      */
